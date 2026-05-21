@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arya Jagtap Portfolio</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+  font-family:Arial,sans-serif;
+}
+
+:root{
+  --main-color:#8e7dbe;
+  --soft-color:#d6c7ff;
+  --card-color:#ffffff;
+}
+
+body{
+  background:#f8f5f2;
+  color:#333;
+  transition:0.4s;
+}
+
+body.dark{
+  background:#1f1f1f;
+  color:white;
+}
+
+header{
+  background:var(--main-color);
+  padding:20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+nav h1{
+  color:white;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:20px;
+}
+
+nav ul li a{
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+nav ul li a:hover{
+  color:#fceaff;
+}
+
+.dark-btn{
+  background:white;
+  color:var(--main-color);
+  border:none;
+  padding:8px 14px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+section {
+  padding:60px 10%;
+  /* Ensures header doesn't cover section content on direct jump link click */
+  scroll-margin-top: 80px; 
+}
+
+.hero{
+  text-align:center;
+  padding-top:80px;
+}
+
+.profile-img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  border:6px solid var(--main-color);
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.hero h1{
+  font-size:48px;
+  color:var(--main-color);
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:20px;
+  color:#666;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:var(--main-color);
+}
+
+.card-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.card{
+  background:var(--card-color);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:0.4s;
+  border-top:5px solid var(--main-color);
+}
+
+body.dark .card{
+  background:#2a2a2a;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card i{
+  font-size:40px;
+  color:var(--main-color);
+  margin-bottom:15px;
+}
+
+.card a{
+  text-decoration:none;
+}
+
+.card button{
+  margin-top:15px;
+  width:100%;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
+}
+
+.skill{
+  background:var(--main-color);
+  color:white;
+  padding:10px 20px;
+  border-radius:20px;
+}
+
+iframe{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:20px;
+  display: block;
+}
+
+.contact-card{
+  max-width:700px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-top:5px solid var(--main-color);
+}
+
+body.dark .contact-card{
+  background:#2a2a2a;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+input,textarea{
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  outline:none;
+}
+
+button{
+  background:var(--main-color);
+  color:white;
+  border:none;
+  padding:12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+footer{
+  background:var(--main-color);
+  color:white;
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+}
+
+.error{
+  color:red;
+  font-size:14px;
+}
+
+.top-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--main-color);
+  color:white;
+  border:none;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  font-size:22px;
+  cursor:pointer;
+  display:none;
+  z-index:1000;
+}
+
+.top-btn:hover{
+  background:#6f5fa5;
+}
+
+@media(max-width:768px){
+
+  nav{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .hero h1{
+    font-size:35px;
+  }
+
+}
+
+.social-icons{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.social-icons a{
+  font-size:35px;
+  color:var(--main-color);
+  transition:0.3s;
+}
+
+.social-icons a:hover{
+  transform:scale(1.2);
+  color:#6f5fa5;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+<nav>
+
+<h1>My Portfolio</h1>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#hobbies">Hobbies</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="dark-btn" id="darkMode">Dark Mode</button>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+<img src="c:\Users\aryaj\Downloads\DSC_4909 01.jpg" alt="Profile Photo" class="profile-img">
+
+<h1>Hello, I'm Arya Jagtap</h1>
+
+<p>Python Developer | Web Developer | Tech Enthusiast</p>
+
+</section>
+
+<div class="social-icons">
+    <a href="https://github.com/AryaJagtap28" target="_blank">
+        <i class="fa-brands fa-github"></i>
+    </a>
+
+    <a href="https://linkedin.com/in/yourusername" target="_blank">
+        <i class="fa-brands fa-linkedin"></i>
+    </a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+
+<h2>Personal Information</h2>
+
+<div class="card-container">
+
+<div class="card">
+<i class="fa-solid fa-user"></i>
+<h3>Name</h3>
+<p>Arya Yashwant Jagtap</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-code"></i>
+<h3>Profession</h3>
+<p>Python Developer</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-location-dot"></i>
+<h3>Location</h3>
+<p>Post Sangli, Tal. Palus, Dist. Sangli</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+
+<h2>Educational Details</h2>
+
+<div class="card-container">
+
+<div class="card">
+<i class="fa-solid fa-graduation-cap"></i>
+<h3>Graduation</h3>
+<p>Bachelor of Computer Applications</p>
+<p><strong>College:</strong> Smt. Mathubai Garware Kanya Mahavidyalaya, Sangli</p>
+<p><strong>CGPA:</strong> 8.5</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-school"></i>
+<h3>12th Standard</h3>
+<p><strong>College:</strong> Secondary School, Bhilawadi</p>
+<p><strong>Percentage:</strong> 69.79%</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-book"></i>
+<h3>Skills Learned</h3>
+<p>HTML, CSS, JavaScript, Python, jQuery, AJAX</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+
+<h2>Hobbies & Interests</h2>
+
+<div class="card-container">
+
+<div class="card">
+<i class="fa-solid fa-person-hiking"></i>
+<h3>Trekking</h3>
+<p>Exploring nature and adventure places</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-laptop-code"></i>
+<h3>Coding</h3>
+<p>Building websites and Python projects</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-camera"></i>
+<h3>Photography</h3>
+<p>Capturing beautiful moments and nature</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-paintbrush"></i>
+<h3>Drawing</h3>
+<p>Creative sketching and artwork design</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+<section>
+
+<h2>Technical Skills</h2>
+
+<div class="skills">
+
+<div class="skill">Python</div>
+<div class="skill">HTML5</div>
+<div class="skill">CSS3</div>
+<div class="skill">JavaScript</div>
+<div class="skill">jQuery</div>
+<div class="skill">AJAX</div>
+<div class="skill">Bootstrap</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+<h2> Projects</h2>
+
+<div class="card-container" id="projectContainer">
+
+<div class="card">
+<i class="fa-solid fa-folder-open"></i>
+<h3>Portfolio Website</h3>
+<p>Responsive portfolio website using HTML, CSS, JavaScript and AJAX.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-folder-open"></i>
+<h3> Mini Project</h3>
+<p>Developed HTML mini project Traveling Website</p>
+<h3> Mejor Project</h3>
+<p>Developed Dot.Net mojer project Cattel Management Website</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- MAP -->
+<section>
+
+<h2>Location Map</h2>
+
+<iframe 
+src="https://www.google.com/maps?q=Sangli,Maharashtra&output=embed"
+height="300"
+style="border:0;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+<p style="text-align:center; font-size:18px; margin-top: 15px;">
+<i class="fa-solid fa-location-dot"></i>
+Post Sangli, Tal. Palus, Dist. Sangli
+</p>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+<h2>Contact Me</h2>
+
+<div class="contact-card">
+
+<form id="contactForm" action="https://formspree.io/f/yourformid" method="POST">
+
+<input type="text" id="name" placeholder="Enter Your Name">
+
+<input type="email" id="email" placeholder="Enter Your Email">
+
+<textarea id="message" rows="5" placeholder="Enter Message"></textarea>
+
+<span class="error" id="error"></span>
+
+<button type="submit">
+<i class="fa-solid fa-paper-plane"></i>
+ Send Message
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+<p>© 2026 Arya Yashwant Jagtap | Python Developer</p>
+
+</footer>
+
+<!-- BACK TO TOP BUTTON -->
+<button id="topBtn" class="top-btn">
+<i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script>
+
+// DARK MODE
+$("#darkMode").click(function(){
+  $("body").toggleClass("dark");
+});
+
+// CARD ANIMATION
+$(".card").hide().fadeIn(1500);
+
+// AJAX PROJECT FETCH
+
+
+// FORM VALIDATION
+$("#contactForm").submit(function(e){
+  let name=$("#name").val().trim();
+  let email=$("#email").val().trim();
+  let message=$("#message").val().trim();
+
+  if(name==="" || email==="" || message===""){
+    e.preventDefault();
+    $("#error").text("All fields are required!");
+  }
+  else{
+    $("#error").text("");
+  }
+});
+
+// SHOW TOP BUTTON
+$(window).scroll(function(){
+  if($(this).scrollTop()>200){
+    $("#topBtn").fadeIn();
+  }
+  else{
+    $("#topBtn").fadeOut();
+  }
+});
+
+// SCROLL TO TOP
+$("#topBtn").click(function(){
+  $("html, body").animate({
+    scrollTop:0
+  },800);
+});
+
+</script>
+
+</body>
+</html>
